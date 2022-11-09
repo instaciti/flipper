@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/fliper.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+
+          <div class="maxWidth">
+            <div class="page three">
+              <div class="back"><img src="./image/book1.jpg" alt=""></div>
+              <div class="front"><img src="./image/book2.jpg" alt=""></div>
+            </div>
+            <div class="page two">
+              <div class="back"><img src="./image/book1.jpg" alt=""></div>
+              <div class="front"><img src="./image/book2.jpg" alt=""></div>
+            </div>
+            <div class="page one">
+              <div class="back"><img src="./image/book1.jpg" alt=""></div>
+              <div class="front"><img src="./image/book2.jpg" alt=""></div>
+            </div>
+            <div class="page cover"> 
+              <div class="back backcover"></div>
+              <div class="front frontcover"><p>⊰Click to open⊱</p></div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+        
+      </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+
+<script>
+    'use strict';
+
+const pages= document.querySelectorAll('.page');
+
+let leftZ = 0;
+let rightZ = 5;
+
+function handlePage (event) {
+  const thisPage = event.currentTarget;
+  console.log('click', thisPage);
+  if (!thisPage.classList.contains('animationOpen') && !thisPage.classList.contains('animationClose')){
+  
+    rightZ += -1;
+    leftZ += 1;
+    thisPage.classList.add('animationOpen');
+    thisPage.style.zIndex=leftZ;
+    console.log(leftZ,rightZ);
+  } else if (thisPage.classList.contains('animationOpen')){
+    thisPage.classList.remove('animationOpen');
+    thisPage.classList.add('animationClose');
+    leftZ += -1;
+    rightZ += +1;
+    thisPage.style.zIndex=rightZ;
+    console.log(leftZ,rightZ);
+  }else{
+    thisPage.classList.remove('animationClose');
+    thisPage.classList.add('animationOpen');
+    rightZ += -1;
+    leftZ += 1;
+    thisPage.classList.add('animationOpen');
+    thisPage.style.zIndex=leftZ;
+    console.log(leftZ,rightZ);
+  }
+}
+window.onload = function() {
+  console.log('window - onload'); // 4th
+};
+for (const page of pages) {
+  page.addEventListener('click', handlePage);
+}
+</script>
+</html>
